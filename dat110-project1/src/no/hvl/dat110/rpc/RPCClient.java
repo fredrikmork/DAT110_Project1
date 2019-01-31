@@ -18,25 +18,40 @@ public class RPCClient {
 	
 	public void connect() {
 		
-		// TODO: connect using the underlying messaging layer connection
-		
-	    throw new RuntimeException("not yet implemented");
+		//connect using the underlying messaging layer connection
+		try {
+			connection = msgclient.connect();
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void disconnect() {
 		
-		// TODO: disconnect/close the underlying messaging connection
+		//disconnect/close the underlying messaging connection
 		
-		throw new RuntimeException("not yet implemented");
+		try {
+			if(connection != null) {
+				connection.close();
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
 	public byte[] call(byte[] rpcrequest) {
+		Message decapsulate = new Message(rpcrequest);
+		connection.send(decapsulate);
+		Message encapsulate = connection.receive();
 		
-		byte[] rpcreply;
+		byte[] rpcreply= encapsulate.getData();
 		
-		/* TODO: 
+		/* 
 		
 		Make a remote call on the RPC server by sending a request message
 		and receive a reply message
@@ -45,10 +60,6 @@ public class RPCClient {
 		rpctreply is the rpcreply to be unmarshalled by the client-stub
 		
 		*/
-		
-		if (true) {
-		  throw new RuntimeException("not yet implemented");
-		}
 		
 		return rpcreply;
 		
