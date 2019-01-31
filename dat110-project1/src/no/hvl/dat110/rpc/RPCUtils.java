@@ -76,13 +76,18 @@ public class RPCUtils {
 	}
 
 	public static byte[] marshallInteger(byte rpcid, int x) {
+		// marshall RPC identifier and string into byte array
 
-		byte[] encoded;
-
-		// TODO: marshall RPC identifier and string into byte array
-
-		if (true) {
-			throw new RuntimeException("not yet implemented");
+		byte[] encoded = new byte[1+4];
+		
+		try {
+			encoded[0] = rpcid;
+			encoded[1] = (byte)(x >> 24);
+			encoded[2] = (byte)(x >> 16);
+			encoded[3] = (byte)(x >> 8);
+			encoded[4] = (byte)(x >> 0);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return encoded;
@@ -90,14 +95,15 @@ public class RPCUtils {
 
 	public static int unmarshallInteger(byte[] data) {
 
-		int decoded;
+		int decoded = 0;
 
-		// TODO: unmarshall integer contained in data
-
-		if (true) {
-			throw new RuntimeException("not yet implemented");
+		try {
+			decoded = data[1] << 24 | (data[2] & 0xFF ) << 16 | (data[3] & 0xFF ) << 8 | (data[4] & 0xFF );
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
+		
 		return decoded;
 
 	}
