@@ -6,11 +6,16 @@ public class RPCUtils {
 
 	public static byte[] marshallString(byte rpcid, String str) {
 
-		byte[] encoded = new byte[rpcid];
+		byte[] encoded = new byte[1 + str.getBytes().length];
 
 		// marshall RPC identifier and string into byte array
+
 		try {
-			encoded = str.getBytes();
+			encoded[0] = rpcid;
+			for (int i = 0; i < str.getBytes().length; i++) {
+				encoded[i + 1] = str.getBytes()[i];
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -24,7 +29,7 @@ public class RPCUtils {
 
 		// unmarshall String contained in data into decoded
 		try {
-			decoded = new String(data);
+			decoded = new String(Arrays.copyOfRange(data, 1, data.length));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,18 +40,18 @@ public class RPCUtils {
 
 	public static byte[] marshallVoid(byte rpcid) {
 
-		byte[] encoded;
+		byte[] encoded = new byte[1];
+		encoded[0] = rpcid;
+		//marshall RPC identifier in case of void type
 
-		// TODO: marshall RPC identifier in case of void type
-		
-		
 		return encoded;
 
 	}
 
 	public static void unmarshallVoid(byte[] data) {
 
-		// TODO: unmarshall void type
+		// unmarshall void type
+		
 	}
 
 	public static byte[] marshallBoolean(byte rpcid, boolean b) {
