@@ -6,12 +6,13 @@ public class RPCUtils {
 
 	public static byte[] marshallString(byte rpcid, String str) {
 
-		byte[] encoded;
+		byte[] encoded = new byte[rpcid];
 
-		// TODO: marshall RPC identifier and string into byte array
-
-		if (true) {
-			throw new RuntimeException("not yet implemented");
+		// marshall RPC identifier and string into byte array
+		try {
+			encoded = str.getBytes();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return encoded;
@@ -19,12 +20,14 @@ public class RPCUtils {
 
 	public static String unmarshallString(byte[] data) {
 
-		String decoded;
+		String decoded = "";
 
-		// TODO: unmarshall String contained in data into decoded
-
-		if (true) {
-			throw new RuntimeException("not yet implemented");
+		// unmarshall String contained in data into decoded
+		try {
+			decoded = new String(data);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return decoded;
@@ -35,11 +38,8 @@ public class RPCUtils {
 		byte[] encoded;
 
 		// TODO: marshall RPC identifier in case of void type
-
-		if (true) {
-			throw new RuntimeException("not yet implemented");
-		}
-
+		
+		
 		return encoded;
 
 	}
