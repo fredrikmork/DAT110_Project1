@@ -10,7 +10,8 @@ public class Display extends RPCStub {
 
 		// TODO
 		// implement marshalling, call and unmarshalling for write RPC method
-
+		byte [] messageB = message.getBytes();
+		
 		throw new RuntimeException("not yet implemented");
 	}
 }
