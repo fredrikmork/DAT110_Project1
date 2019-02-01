@@ -7,15 +7,15 @@ public class Sensor extends RPCStub {
 	private byte RPCID = 1;
 	
 	public int read() {
+		// implement marshalling, call and unmarshalling for read RPC method
 		
 		int temp;
 		
-		// TODO
-		// implement marshalling, call and unmarshalling for read RPC method
+		byte[] request = RPCUtils.marshallVoid(RPCID);
+		byte[] response = rmiclient.call(request);
+		temp = RPCUtils.unmarshallInteger(response);
+	
 		
-		if (true) {
-			  throw new RuntimeException("not yet implemented");
-		}
 		
 		return temp;
 	}

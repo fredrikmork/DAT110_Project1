@@ -22,25 +22,32 @@ public class Controller  {
 		displayclient = new RPCClient(Common.DISPLAYHOST,Common.DISPLAYPORT);
 		sensorclient = new RPCClient(Common.SENSORHOST,Common.SENSORPORT);
 		
-		// TODO
 		// create display and sensor object
-		// create RPC clients for display device and sensor device
-		// register RPC methods in the RPC layer
+		display = new Display();
+		sensor = new Sensor();
 		
-		if (true) {
-			  throw new RuntimeException("not yet implemented");
-		}
+		// create RPC clients for display device and sensor device
+		displayclient.connect();
+		sensorclient.connect();
+			
+		// register RPC methods in the RPC layer
+		displayclient.register(display);
+		sensorclient.register(sensor);
 		
 		// register stop methods in the RPC middleware
 		displayclient.register(stopdisplay);
 		sensorclient.register(stopsensor);
 		
-		// TODO:
 		// loop while reading from sensor and write to display via RPC
-		
-		if (true) {
-			  throw new RuntimeException("not yet implemented");
+		for (int i = 0; i < N; i++) {
+			
+			display.write(Integer.toString(sensor.read()));
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+		}
 		
 		stopdisplay.stop();
 		stopsensor.stop();
