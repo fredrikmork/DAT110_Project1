@@ -45,6 +45,9 @@ public class RPCClient {
 		 * 
 		 */
 
+		if (connection == null) {
+			connect();
+		}
 		Message message = new Message(rpcrequest);
 		connection.send(message);
 

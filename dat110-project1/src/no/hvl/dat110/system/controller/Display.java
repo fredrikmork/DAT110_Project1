@@ -11,9 +11,9 @@ public class Display extends RPCStub {
 		// TODO
 		// implement marshalling, call and unmarshalling for write RPC method
 		byte[] marshalling = RPCUtils.marshallString(RPCID, message);
-		rmiclient.connect();
+//		rmiclient.connect();
 		rmiclient.call(marshalling);
 		RPCUtils.unmarshallString(marshalling);
-		rmiclient.disconnect();
+//		rmiclient.disconnect();
 	}
 }

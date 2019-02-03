@@ -27,8 +27,8 @@ public class Controller  {
 		sensor = new Sensor();
 		
 		// create RPC clients for display device and sensor device
-		displayclient.connect();
-		sensorclient.connect();
+//		displayclient.connect();
+//		sensorclient.connect();
 			
 		// register RPC methods in the RPC layer
 		displayclient.register(display);
@@ -39,11 +39,12 @@ public class Controller  {
 		sensorclient.register(stopsensor);
 		
 		// loop while reading from sensor and write to display via RPC
+		String temp;
 		for (int i = 0; i < N; i++) {
-			
+			temp = new Integer(sensor.read()).toString();
 			display.write(Integer.toString(sensor.read()));
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(750);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
